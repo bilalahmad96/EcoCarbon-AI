@@ -1,0 +1,233 @@
+import { DbState } from './types';
+
+export const initialDbState: DbState = {
+  factory: {
+    id: 'factory-001',
+    name: 'EcoCarbon Smart Alloys Ltd',
+    industryType: 'Heavy Metallurgy & Steel Alloys',
+    address: 'Sector 4, Industrial Development Zone, Tech City',
+    productionCapacity: 500, // tonnes per month
+    electricitySource: 'grid',
+    solarAvailability: true,
+    solarCapacity: 150, // kW peak
+    generatorUsage: 'occasional',
+    workingHours: 16,
+    employees: 180,
+    monthlyProductionTarget: 420, // tonnes
+    carbonTarget: 120, // tonnes CO2 per month
+    gridFactor: 0.42 // tons CO2 per MWh
+  },
+  machines: [
+    {
+      id: 'm1',
+      name: 'Electric Arc Melting Furnace (EAF-1)',
+      energyMeterId: 'EM-FURNACE-01',
+      powerRating: 450, // kW
+      avgWorkingHours: 12,
+      status: 'Running',
+      efficiency: 88,
+      co2GeneratedToday: 2150, // kg CO2
+      fuelUsage: 0,
+      maintenanceStatus: 'Optimal',
+      healthScore: 92,
+      maintenanceDate: '2026-06-15'
+    },
+    {
+      id: 'm2',
+      name: 'Hydraulic Heavy Forging Press (HFP-2)',
+      energyMeterId: 'EM-PRESS-02',
+      powerRating: 180, // kW
+      avgWorkingHours: 10,
+      status: 'Running',
+      efficiency: 74, // low efficiency
+      co2GeneratedToday: 820,
+      fuelUsage: 0,
+      maintenanceStatus: 'Pending Service',
+      healthScore: 68,
+      maintenanceDate: '2026-05-10'
+    },
+    {
+      id: 'm3',
+      name: 'Industrial Air Compressor System (ACS-3)',
+      energyMeterId: 'EM-COMPRESS-03',
+      powerRating: 90, // kW
+      avgWorkingHours: 16,
+      status: 'Idle', // Currently drawing idle power
+      efficiency: 65, // Inefficient cycle
+      co2GeneratedToday: 380,
+      fuelUsage: 0,
+      maintenanceStatus: 'Needs Attention',
+      healthScore: 54,
+      maintenanceDate: '2026-04-01'
+    },
+    {
+      id: 'm4',
+      name: 'Automated CNC Milling Center (CNC-4)',
+      energyMeterId: 'EM-MILL-04',
+      powerRating: 75, // kW
+      avgWorkingHours: 14,
+      status: 'Running',
+      efficiency: 94,
+      co2GeneratedToday: 280,
+      fuelUsage: 0,
+      maintenanceStatus: 'Optimal',
+      healthScore: 96,
+      maintenanceDate: '2026-06-20'
+    },
+    {
+      id: 'm5',
+      name: 'Auxiliary Diesel Backup Generator (GEN-5)',
+      energyMeterId: 'EM-GEN-05',
+      powerRating: 300, // kW capacity
+      avgWorkingHours: 2,
+      status: 'Stopped',
+      efficiency: 82,
+      co2GeneratedToday: 0,
+      fuelUsage: 45, // Liters per hour
+      maintenanceStatus: 'Optimal',
+      healthScore: 89,
+      maintenanceDate: '2026-06-10'
+    },
+    {
+      id: 'm6',
+      name: 'Facility HVAC & Exhaust Ventilation (HVAC-6)',
+      energyMeterId: 'EM-HVAC-06',
+      powerRating: 120, // kW
+      avgWorkingHours: 24,
+      status: 'Running',
+      efficiency: 85,
+      co2GeneratedToday: 650,
+      fuelUsage: 0,
+      maintenanceStatus: 'Optimal',
+      healthScore: 90,
+      maintenanceDate: '2026-05-25'
+    }
+  ],
+  energyRecords: [
+    { timestamp: '2026-01-31T23:59:59Z', gridConsumption: 142000, dieselConsumption: 1200, solarGeneration: 8400, totalCo2: 62820 },
+    { timestamp: '2026-02-28T23:59:59Z', gridConsumption: 138000, dieselConsumption: 1500, solarGeneration: 9800, totalCo2: 61950 },
+    { timestamp: '2026-03-31T23:59:59Z', gridConsumption: 148000, dieselConsumption: 800, solarGeneration: 11200, totalCo2: 64280 },
+    { timestamp: '2026-04-30T23:59:59Z', gridConsumption: 135000, dieselConsumption: 400, solarGeneration: 13600, totalCo2: 57760 },
+    { timestamp: '2026-05-31T23:59:59Z', gridConsumption: 151000, dieselConsumption: 600, solarGeneration: 14800, totalCo2: 65010 },
+    { timestamp: '2026-06-30T23:59:59Z', gridConsumption: 144000, dieselConsumption: 200, solarGeneration: 15900, totalCo2: 61010 }
+  ],
+  productionRecords: [
+    { timestamp: '2026-01-31T23:59:59Z', volume: 380, unit: 'Tonnes' },
+    { timestamp: '2026-02-28T23:59:59Z', volume: 365, unit: 'Tonnes' },
+    { timestamp: '2026-03-31T23:59:59Z', volume: 410, unit: 'Tonnes' },
+    { timestamp: '2026-04-30T23:59:59Z', volume: 395, unit: 'Tonnes' },
+    { timestamp: '2026-05-31T23:59:59Z', volume: 440, unit: 'Tonnes' },
+    { timestamp: '2026-06-30T23:59:59Z', volume: 425, unit: 'Tonnes' }
+  ],
+  carbonRecords: [
+    { timestamp: '2026-01-31T23:59:59Z', co2Grid: 59.64, co2Diesel: 3.18, co2Total: 62.82, sustainabilityScore: 78 },
+    { timestamp: '2026-02-28T23:59:59Z', co2Grid: 57.96, co2Diesel: 3.99, co2Total: 61.95, sustainabilityScore: 76 },
+    { timestamp: '2026-03-31T23:59:59Z', co2Grid: 62.16, co2Diesel: 2.12, co2Total: 64.28, sustainabilityScore: 80 },
+    { timestamp: '2026-04-30T23:59:59Z', co2Grid: 56.70, co2Diesel: 1.06, co2Total: 57.76, sustainabilityScore: 84 },
+    { timestamp: '2026-05-31T23:59:59Z', co2Grid: 63.42, co2Diesel: 1.59, co2Total: 65.01, sustainabilityScore: 82 },
+    { timestamp: '2026-06-30T23:59:59Z', co2Grid: 60.48, co2Diesel: 0.53, co2Total: 61.01, sustainabilityScore: 86 }
+  ],
+  recommendations: [
+    {
+      id: 'rec-001',
+      title: 'Shift Press HFP-2 Operation to Off-Peak Hours',
+      description: 'Run the heavy Hydraulic Forging Press (HFP-2) between 10:00 PM and 6:00 AM. This reduces drawing from peak-hour high-carbon grid supply and leverages cheaper industrial tariffs.',
+      carbonReduction: 3800, // kg CO2/month
+      costSaving: 1450, // USD/month
+      roi: 0, // Instant
+      priority: 'High',
+      difficulty: 'Easy',
+      status: 'Proposed',
+      createdAt: '2026-07-01T08:00:00Z'
+    },
+    {
+      id: 'rec-002',
+      title: 'Install Variable Frequency Drive (VFD) on Air Compressors',
+      description: 'VFD motors regulate compression frequency based on load. Minimizes energy loss during idle and part-load states on ACS-3 which currently operates at poor efficiency.',
+      carbonReduction: 4200,
+      costSaving: 1200,
+      roi: 18,
+      priority: 'High',
+      difficulty: 'Medium',
+      status: 'Proposed',
+      createdAt: '2026-07-02T11:30:00Z'
+    },
+    {
+      id: 'rec-003',
+      title: 'Expand Solar Photovoltaic Array (Add 100 kWp)',
+      description: 'Utilize the empty roof space of Workshop B to install another 100 kWp solar panels. Generates approximately 12,000 additional kWh of clean energy monthly.',
+      carbonReduction: 5040,
+      costSaving: 1800,
+      roi: 36,
+      priority: 'Medium',
+      difficulty: 'Hard',
+      status: 'Proposed',
+      createdAt: '2026-07-03T14:15:00Z'
+    },
+    {
+      id: 'rec-004',
+      title: 'Implement Smart Idle Automation on CNC-4',
+      description: 'Program the CNC milling center to auto-hibernate after 10 minutes of inactivity, bringing standby load from 12 kW to less than 1 kW.',
+      carbonReduction: 980,
+      costSaving: 320,
+      roi: 1,
+      priority: 'Low',
+      difficulty: 'Easy',
+      status: 'Active',
+      createdAt: '2026-07-03T16:00:00Z'
+    }
+  ],
+  alerts: [
+    {
+      id: 'alert-1',
+      timestamp: '2026-07-04T08:15:00Z',
+      type: 'power_spike',
+      severity: 'Warning',
+      message: 'Grid load spike detected: 480 kW exceeded standard operating parameters at Workshop A.',
+      isRead: false
+    },
+    {
+      id: 'alert-2',
+      timestamp: '2026-07-03T14:22:00Z',
+      type: 'machine_anomaly',
+      severity: 'Critical',
+      message: 'Air Compressor (ACS-3) efficiency dropped below 65%. High friction or leak suspected.',
+      isRead: false
+    },
+    {
+      id: 'alert-3',
+      timestamp: '2026-07-02T11:00:00Z',
+      type: 'carbon_limit',
+      severity: 'Info',
+      message: 'Monthly cumulative carbon target reached 50%. Factory is on track for emissions goals.',
+      isRead: true
+    }
+  ],
+  chats: [
+    {
+      id: 'chat-1',
+      sender: 'ai',
+      text: "Hello! I'm your EcoCarbon AI Sustainability Assistant. I monitor your smart factory's electricity meters, machine parameters, and carbon intensity. Ask me anything about your current emissions, machine efficiency, and energy-saving measures!",
+      timestamp: '2026-07-04T09:00:00Z'
+    }
+  ],
+  goal: {
+    targetPercentage: 30,
+    startDate: '2026-07-01',
+    durationMonths: 6,
+    expectedSavingsUSD: 18600,
+    monthlyRoadmap: [
+      { month: 'July 2026', targetCo2: 55.0, completed: false, milestone: 'Schedule Press HFP-2 off-peak shift & clear leaks in ACS-3' },
+      { month: 'August 2026', targetCo2: 51.2, completed: false, milestone: 'Install VFD motors on ACS-3 air compressors' },
+      { month: 'September 2026', targetCo2: 48.0, completed: false, milestone: 'Optimize HVAC setpoints and install LED bay lighting' },
+      { month: 'October 2026', targetCo2: 45.1, completed: false, milestone: 'Solar PV panel installation and commissioning' },
+      { month: 'November 2026', targetCo2: 43.2, completed: false, milestone: 'Instate waste heat recovery systems on Arc Furnace' },
+      { month: 'December 2026', targetCo2: 41.5, completed: false, milestone: 'Achievement of 30% reduction and certification audit' }
+    ]
+  },
+  activityLogs: [
+    { timestamp: '2026-07-04T10:15:00Z', action: 'Set carbon reduction target to 30%', user: 'Admin' },
+    { timestamp: '2026-07-04T09:30:00Z', action: 'Activated Smart Idle Automation recommendation (rec-004)', user: 'Factory Manager' },
+    { timestamp: '2026-07-03T16:45:00Z', action: 'Added new Machine: Automated CNC Milling Center (CNC-4)', user: 'Admin' }
+  ]
+};

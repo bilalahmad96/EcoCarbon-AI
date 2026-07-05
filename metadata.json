@@ -1,0 +1,6 @@
+{
+  "name": "EcoCarbon AI",
+  "description": "Ultra-Premium AI-Powered Carbon Emission Dashboard and Sustainability Assistant for Smart Manufacturing Industries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

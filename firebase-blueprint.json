@@ -1,0 +1,181 @@
+{
+  "entities": {
+    "Factory": {
+      "title": "Factory",
+      "description": "Information about a manufacturing facility.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "industryType": { "type": "string" },
+        "address": { "type": "string" },
+        "productionCapacity": { "type": "number" },
+        "electricitySource": { "type": "string" },
+        "solarAvailability": { "type": "boolean" },
+        "generatorUsage": { "type": "string" },
+        "workingHours": { "type": "number" },
+        "employees": { "type": "number" },
+        "monthlyProductionTarget": { "type": "number" },
+        "carbonTarget": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "industryType", "carbonTarget"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile inside the organization.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["Admin", "Manager", "Viewer"] },
+        "factoryId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "factoryId"]
+    },
+    "Machine": {
+      "title": "Machine",
+      "description": "A piece of machinery operating in the factory.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "energyMeterId": { "type": "string" },
+        "powerRating": { "type": "number" },
+        "avgWorkingHours": { "type": "number" },
+        "status": { "type": "string", "enum": ["Running", "Idle", "Stopped"] },
+        "efficiency": { "type": "number" },
+        "co2GeneratedToday": { "type": "number" },
+        "fuelUsage": { "type": "number" },
+        "maintenanceStatus": { "type": "string" },
+        "healthScore": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "energyMeterId", "status", "healthScore"]
+    },
+    "EnergyRecord": {
+      "title": "EnergyRecord",
+      "description": "Periodic log of energy consumption and generation.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "gridConsumption": { "type": "number" },
+        "dieselConsumption": { "type": "number" },
+        "solarGeneration": { "type": "number" },
+        "totalCo2": { "type": "number" }
+      },
+      "required": ["timestamp", "gridConsumption"]
+    },
+    "ProductionRecord": {
+      "title": "ProductionRecord",
+      "description": "Log of factory production outputs.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "volume": { "type": "number" },
+        "unit": { "type": "string" }
+      },
+      "required": ["timestamp", "volume"]
+    },
+    "CarbonRecord": {
+      "title": "CarbonRecord",
+      "description": "Calculated carbon emission history.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "co2Grid": { "type": "number" },
+        "co2Diesel": { "type": "number" },
+        "co2Total": { "type": "number" },
+        "sustainabilityScore": { "type": "number" }
+      },
+      "required": ["timestamp", "co2Total"]
+    },
+    "Recommendation": {
+      "title": "Recommendation",
+      "description": "AI carbon reduction strategies.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "carbonReduction": { "type": "number" },
+        "costSaving": { "type": "number" },
+        "roi": { "type": "number" },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "difficulty": { "type": "string", "enum": ["Easy", "Medium", "Hard"] },
+        "status": { "type": "string", "enum": ["Proposed", "Active", "Completed", "Ignored"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "carbonReduction", "costSaving", "priority", "status"]
+    },
+    "Alert": {
+      "title": "Alert",
+      "description": "Smart notifications and anomaly detection logs.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "type": { "type": "string" },
+        "severity": { "type": "string", "enum": ["Critical", "Warning", "Info"] },
+        "message": { "type": "string" },
+        "isRead": { "type": "boolean" }
+      },
+      "required": ["timestamp", "type", "severity", "message", "isRead"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Interactive chat with the AI Sustainability Assistant.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sender": { "type": "string", "enum": ["user", "ai"] },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["sender", "text", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/factories/{factoryId}": {
+      "schema": "Factory",
+      "description": "Profile info for each smart factory"
+    },
+    "/factories/{factoryId}/users/{userId}": {
+      "schema": "User",
+      "description": "Factory users list mapped to authentication IDs"
+    },
+    "/factories/{factoryId}/machines/{machineId}": {
+      "schema": "Machine",
+      "description": "Factory machine-wise performance and emissions"
+    },
+    "/factories/{factoryId}/energy_records/{recordId}": {
+      "schema": "EnergyRecord",
+      "description": "Time-series database of grid, solar, and diesel records"
+    },
+    "/factories/{factoryId}/production_records/{recordId}": {
+      "schema": "ProductionRecord",
+      "description": "Time-series database of production statistics"
+    },
+    "/factories/{factoryId}/carbon_records/{recordId}": {
+      "schema": "CarbonRecord",
+      "description": "Time-series of calculated carbon and sustainability scores"
+    },
+    "/factories/{factoryId}/recommendations/{recId}": {
+      "schema": "Recommendation",
+      "description": "Actionable reduction strategies proposed by Gemini"
+    },
+    "/factories/{factoryId}/alerts/{alertId}": {
+      "schema": "Alert",
+      "description": "Notification history for carbon caps and machine health"
+    },
+    "/factories/{factoryId}/chats/{chatId}": {
+      "schema": "ChatMessage",
+      "description": "Stored conversation logs with the virtual assistant"
+    }
+  }
+}
