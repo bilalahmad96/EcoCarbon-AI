@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import LandingPage from './components/LandingPage.js';
-import LoginRegister from './components/LoginRegister.js';
-import Sidebar from './components/Sidebar.js';
-import OverviewTab from './components/OverviewTab.js';
-import LiveMonitoringTab from './components/LiveMonitoringTab.js';
-import MachinesTab from './components/MachinesTab.js';
-import PredictionsTab from './components/PredictionsTab.js';
-import RecommendationsTab from './components/RecommendationsTab.js';
-import AIAssistantTab from './components/AIAssistantTab.js';
-import ReportsTab from './components/ReportsTab.js';
-import PlannerTab from './components/PlannerTab.js';
-import SettingsTab from './components/SettingsTab.js';
-import { DbState, Machine, Recommendation, ReductionGoal } from './types.js';
+import LandingPage from './components/LandingPage';
+import LoginRegister from './components/LoginRegister';
+import Sidebar from './components/Sidebar';
+import OverviewTab from './components/OverviewTab';
+import LiveMonitoringTab from './components/LiveMonitoringTab';
+import MachinesTab from './components/MachinesTab';
+import PredictionsTab from './components/PredictionsTab';
+import RecommendationsTab from './components/RecommendationsTab';
+import AIAssistantTab from './components/AIAssistantTab';
+import ReportsTab from './components/ReportsTab';
+import PlannerTab from './components/PlannerTab';
+import SettingsTab from './components/SettingsTab';
+import { DbState, Machine, Recommendation, ReductionGoal } from './types';
 
 export default function App() {
   // Navigation & User views
